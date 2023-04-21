@@ -1,4 +1,4 @@
-#include <stdio.h>
+  #include <stdio.h>
 
 #include <sys/types.h> 
 #include <sys/stat.h>
@@ -27,6 +27,19 @@ int main(void) {
     {
       printf("buf[%d]: 0x%02x - %d (%c)\n", i, buf[i], buf[i], buf[i]);
     }
+  close(fd);
+
+  fd = open(pathname, flags);
+  char bin_data[] = {0x01, 0x02, 0x03};
+  int num_written = write(fd, bin_data, sizeof(bin_data));
+  if (-1 == num_written)
+  {
+    perror("write");
+    return 2;
+  }
+
+  printf("num_written: %d\n", num_written);
+  
   close(fd);
   
   return 0;
